@@ -7,7 +7,7 @@ const app = express();
 
 // Configura CORS
 const corsOptions = {
-   origin: 'https://amazon-sp-api-nine.vercel.app',
+   origin: 'https://amazon-sp-api-nine.vercel.app', // URL de tu frontend
    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
    allowedHeaders: ['Content-Type', 'Authorization', 'x-amz-access-token'], // Headers permitidos
    credentials: true // Si necesitas enviar cookies o autenticación
@@ -15,6 +15,16 @@ const corsOptions = {
 
 // Aplica CORS
 app.use(cors(corsOptions));
+
+// Middleware para permitir solicitudes de un dominio específico
+app.use(function (req, res, next) {
+   res.header('Access-Control-Allow-Origin', 'https://amazon-sp-api-nine.vercel.app'); // Cambia a tu dominio
+   res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept, x-amz-access-token'
+   );
+   next();
+});
 
 // Maneja solicitudes OPTIONS para cualquier ruta
 app.options('*', cors(corsOptions));
