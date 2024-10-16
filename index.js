@@ -16,7 +16,13 @@ const corsOptions = {
 // Aplica CORS
 app.use(cors(corsOptions));
 
-// Maneja solicitudes OPTIONS
+// Agrega encabezados CORS adicionales
+app.use((req, res, next) => {
+   res.header('Access-Control-Allow-Origin', 'https://amazon-sp-api-nine.vercel.app'); // Cambia según sea necesario
+   next();
+});
+
+// Maneja solicitudes OPTIONS para la ruta específica
 app.options('/marketplace-participations', cors(corsOptions));
 
 // Para manejar JSON en el cuerpo de las solicitudes
