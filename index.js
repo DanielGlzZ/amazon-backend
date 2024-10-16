@@ -7,12 +7,19 @@ const app = express();
 
 // Configura CORS
 const corsOptions = {
-   origin: 'https://amazon-sp-api-nine.vercel.app',
-   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-   allowedHeaders: ['Content-Type', 'Authorization', 'x-amz-access-token']
+   origin: 'https://amazon-sp-api-nine.vercel.app', // URL de tu frontend
+   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+   allowedHeaders: ['Content-Type', 'Authorization', 'x-amz-access-token'], // Headers permitidos
+   credentials: true // Si necesitas enviar cookies o autenticación
 };
 
+// Aplica CORS
 app.use(cors(corsOptions));
+
+// Maneja solicitudes OPTIONS
+app.options('/marketplace-participations', cors(corsOptions));
+
+// Para manejar JSON en el cuerpo de las solicitudes
 app.use(bodyParser.json());
 
 // Ruta para obtener participaciones del marketplace
