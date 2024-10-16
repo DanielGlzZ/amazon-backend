@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios'); // Importa Axios
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
 app.use(bodyParser.json()); // Para manejar JSON en el cuerpo de las solicitudes
@@ -34,6 +33,5 @@ app.get('/api/marketplace-participations', async (req, res) => {
    }
 });
 
-app.listen(PORT, () => {
-   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+// Exportar la aplicación
+module.exports = app;
